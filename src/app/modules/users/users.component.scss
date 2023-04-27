@@ -1,0 +1,27 @@
+.users-list{
+    max-width: 1500px;
+    margin: 25px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .user-card {
+    margin: 12px;
+    width: 350px;
+  }
+  
+  .user-avatar {
+    width: 275px;
+    height: 100%;
+    border-radius: 50%;
+  }
+  
+  mat-card-subtitle{
+    font-size: 16px;
+  }
+  
+  p{
+    margin: 5px 0px;
+  }
+  

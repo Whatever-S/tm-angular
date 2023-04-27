@@ -1,0 +1,23 @@
+<mat-toolbar class="toolbar-wrapper" color="primary">
+  <div class="title">
+    <span>Angular Lecture 1</span>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Sort By</mat-label>
+      <mat-select [(value)]="sortField" (selectionChange)="sort()">
+        <mat-option value="firstname">First Name</mat-option>
+        <mat-option value="lastname">Last Name</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-flat-button color="primary">Select all</button>
+    <button  mat-icon-button (click)="onDeleteSelected()" [disabled]="selectedUsers.length === 0">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput  name="username" #username type="text" placeholder="Search...">
+    </mat-form-field>
+  </div>
+  
+</mat-toolbar>
