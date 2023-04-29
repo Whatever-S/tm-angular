@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { UsersStoreService } from "../../services/users-store.service";
+import { MatSelectChange } from "@angular/material/select";
+import { MatInput } from "@angular/material/input";
 
 @Component({
   selector: 'app-toolbar',
@@ -6,41 +9,25 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
+  @ViewChild('firstNameInput') firstNameInput!: ElementRef<MatInput>;
 
-  @Output() search = new EventEmitter<string>();
-  @Output() selectAll = new EventEmitter<void>();
-  @Output() sortFieldChange = new EventEmitter<string>();
-  @Output() deleteSelected = new EventEmitter<void>();
+  constructor(public usersStoreService: UsersStoreService) {}
 
-  sortField: string = 'firstname';
-  selectedUsers: number[] = [];
-
-  applyFilter(filterValue: string) {
-    const trimmedValue = filterValue.trim().toLowerCase();
-    this.search.emit(trimmedValue);
+  deleteSelected(): void {
+    this.firstNameInput.nativeElement.value = '';
+    this.usersStoreService.deleteUsers().subscribe();
   }
 
-  sort() {
-    this.sortFieldChange.emit(this.sortField);
+  selectAll(): void {
+    this.usersStoreService.selectAll()
   }
 
-  onSelectionChange(event: any, id: number) {
-    if (event.checked) {
-      this.selectedUsers.push(id);
-    } else {
-      const index = this.selectedUsers.indexOf(id);
-      if (index !== -1) {
-        this.selectedUsers.splice(index, 1);
-      }
-    }
+  sortUsers(event: MatSelectChange): void {
+    this.usersStoreService.updateSortRule(event.value);
+    this.usersStoreService.sortUsers();
   }
 
-  onDeleteSelected() {
-    this.deleteSelected.emit();
+  searchUsers() {
+    this.usersStoreService.searchUsers(this.firstNameInput.nativeElement.value).subscribe();
   }
-
-  onSelectAll() {
-    this.selectAll.emit();
-  }
-
 }

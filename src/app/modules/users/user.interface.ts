@@ -6,3 +6,6 @@ export interface User {
   phone: string;
   avatar: string
 }
+
+
+export type SortedFields = 'firstName' | 'lastName';

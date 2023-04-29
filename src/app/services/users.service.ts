@@ -16,15 +16,15 @@ export class UserService {
     return this.http.get<User[]>(this.apiUrl);
   }
 
-  deleteUser(id: number): Observable<User[]> {
+  deleteUser(ids: number[]): Observable<User[]> {
     return this.getUsers().pipe(
-      map(users => {
-        const index = users.findIndex(user => user.id === id);
-        if (index !== -1) {
-          users.splice(index, 1);
-        }
-        return users;
-      })
+      map(users => users.filter(user => !ids.find(id => user.id === id)))
+    );
+  }
+
+  searchUsers(value: string): Observable<User[]> {
+    return this.getUsers().pipe(
+      map(users => users.filter((user) => user.firstName.toLowerCase().includes(value.toLowerCase())))
     );
   }
 }

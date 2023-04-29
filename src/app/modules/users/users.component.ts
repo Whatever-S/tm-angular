@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from './user.interface';
-import { UserService } from 'src/app/services/users.service';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { UsersStoreService } from 'src/app/services/users-store.service';
 
 @Component({
   selector: 'app-users',
@@ -8,20 +8,19 @@ import { UserService } from 'src/app/services/users.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-  users: User[] = [];
-
-  constructor(private userService: UserService) { }
+  constructor(public usersStoreService: UsersStoreService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(users => {
-      this.users = users;
-      console.log(this.users)
-    });
+    this.usersStoreService.getUsers().subscribe();
   }
 
-  deleteUser(id: number): void {
-    this.userService.deleteUser(id).subscribe(users => {
-      this.users = users;
-    });
+  checkboxChange(id: number, event: MatCheckboxChange): void {
+    if (event.checked) {
+      this.usersStoreService.addSelectedId(id);
+    }
+
+    if (!event.checked) {
+      this.usersStoreService.removeSelectedId(id);
+    }
   }
 }
