@@ -7,15 +7,15 @@ import { UserService } from './users.service';
   providedIn: 'root'
 })
 export class UsersStoreService {
-  private readonly sortBy$$ = new BehaviorSubject<SortedFields>('firstName');
-  private readonly checkedUserIds$$ = new BehaviorSubject<number[]>([]);
-  private readonly users$$ = new BehaviorSubject<User[]>([]);
+  private sortBy$$ = new BehaviorSubject<SortedFields>('firstName');
+  private checkedUserIds$$ = new BehaviorSubject<number[]>([]);
+  private users$$ = new BehaviorSubject<User[]>([]);
 
-  readonly sortBy$ = this.sortBy$$.asObservable();
-  readonly checkedUserIds$ = this.checkedUserIds$$.asObservable();
-  readonly users$ = this.users$$.asObservable();
+  sortBy$ = this.sortBy$$.asObservable();
+  checkedUserIds$ = this.checkedUserIds$$.asObservable();
+  users$ = this.users$$.asObservable();
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private userService: UserService) {}
 
   getUsers(): Observable<User[]> {
     return this.userService.getUsers().pipe(

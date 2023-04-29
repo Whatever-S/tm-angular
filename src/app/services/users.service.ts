@@ -24,7 +24,7 @@ export class UserService {
 
   searchUsers(value: string): Observable<User[]> {
     return this.getUsers().pipe(
-      map(users => users.filter((user) => user.firstName.toLowerCase().includes(value.toLowerCase())))
+      map(users => users.filter((user) => user.firstName.toLowerCase().includes(value.toLowerCase()) || user.lastName.toLowerCase().includes(value.toLowerCase())))
     );
   }
 }

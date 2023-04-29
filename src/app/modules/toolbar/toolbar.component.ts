@@ -9,12 +9,12 @@ import { MatInput } from "@angular/material/input";
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
-  @ViewChild('firstNameInput') firstNameInput!: ElementRef<MatInput>;
+  @ViewChild('nameInput') nameInput!: ElementRef<MatInput>;
 
   constructor(public usersStoreService: UsersStoreService) {}
 
   deleteSelected(): void {
-    this.firstNameInput.nativeElement.value = '';
+    this.nameInput.nativeElement.value = '';
     this.usersStoreService.deleteUsers().subscribe();
   }
 
@@ -28,6 +28,6 @@ export class ToolbarComponent {
   }
 
   searchUsers() {
-    this.usersStoreService.searchUsers(this.firstNameInput.nativeElement.value).subscribe();
+    this.usersStoreService.searchUsers(this.nameInput.nativeElement.value).subscribe();
   }
 }

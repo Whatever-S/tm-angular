@@ -1,24 +1,21 @@
-<mat-toolbar class="toolbar-wrapper" color="primary">
-  <div class="title">
-    <span>Angular Lecture 1</span>
-  </div>
+<mat-toolbar class="toolbar-wrapper" color="primary" >
+  <span class="title">Angular 1</span>
   <div class="filters">
-    <mat-form-field>
-      <mat-label>Sort By</mat-label>
-      <mat-select [value]="usersStoreService.sortBy$ | async" (selectionChange)="sortUsers($event)">
+    <mat-form-field appearance="fill" color="accent" >
+    <mat-label>Sort By</mat-label>
+      <mat-select class="sort" [value]="usersStoreService.sortBy$ | async"  (selectionChange)="sortUsers($event)">
         <mat-option value="firstName">First Name</mat-option>
         <mat-option value="lastName">Last Name</mat-option>
       </mat-select>
-    </mat-form-field>
-    <button mat-flat-button color="primary" (click)="selectAll()">Select all</button>
-    <button  mat-icon-button
+    </mat-form-field >
+    <button mat-flat-button class="select-all"(click)="selectAll()">Select all</button>
+    <button mat-flat-button class="delete"
              (click)="deleteSelected()"
-             [disabled]="(this.usersStoreService.checkedUserIds$ | async)?.length === 0">
-      <mat-icon>delete</mat-icon>
+             [disabled]="(this.usersStoreService.checkedUserIds$ | async)?.length === 0">Delete
     </button>
-    <mat-form-field>
-      <mat-label>Search</mat-label>
-      <input matInput name="username" #firstNameInput type="text" placeholder="Search..." (input)="searchUsers()">
-    </mat-form-field>
   </div>
+    <mat-form-field appearance="fill" color="accent" class="search">
+      <mat-label>Search</mat-label>
+      <input matInput name="username" #nameInput type="text" placeholder="Search..." (input)="searchUsers()">
+    </mat-form-field>
 </mat-toolbar>

@@ -7,7 +7,8 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from "@angular/material/button";
+
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatSelectModule,
     MatInputModule,
     MatOptionModule,
-    MatDividerModule
+    MatButtonModule
   ],
   exports: [
     ToolbarComponent
